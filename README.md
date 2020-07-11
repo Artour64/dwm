@@ -1,10 +1,10 @@
-#My build of dwm
+# My build of dwm
 Get original at: https://dwm.suckless.org/
 
-##Patches:
+## Patches:
  - systray https://dwm.suckless.org/patches/systray/
 
-##Keybinded Programs:
+## Keybinded Programs:
  - kupfer (app launcher)
  - kitty (terminal emulator)
  - flameshot and gnome-screenshot (screenshot program)
