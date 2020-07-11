@@ -1,16 +1,16 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
+static const unsigned int borderpx  = 5;        /* border pixel of windows */
+static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const int topbar             = 0;        /* 0 means bottom bar */
+static const char *fonts[]          = { "monospace:size=12" };
+static const char dmenufont[]       = "monospace:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -48,7 +48,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -57,16 +57,41 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
+
+static const char *kupfer[]  = { "kupfer", NULL };
+static const char *rofiwin[]  = { "rofi","-show","window", NULL };
+static const char *openfile[]  = { "/home/artour/mysh/openfile", NULL };
+static const char *openfilea[]  = { "/home/artour/mysh/openfile-a", NULL };
+
+static const char *exitcmd[]  = { "/home/artour/mysh/exit.sh", NULL };
+
+static const char *dwmbind[]  = { "/home/artour/mysh/dwmbind.sh", NULL };
+/*static const char *i3bindcmd[]  = { "/home/artour/mysh/i3bind.sh", NULL };*/
+
+#define PrintScreenDWM	    0x0000ff61
+static const char *screenshot[]  = { "flameshot","screen","-p","/home/artour/Pictures/screenshot", NULL };
+static const char *screenshotadvanced[]  = { "gnome-screenshot","-i", NULL };
+
+
+static const char *volup1[] = { "/home/artour/mysh/dwmvol.sh","+1",NULL };
+static const char *volup10[] = { "/home/artour/mysh/dwmvol.sh","+10", NULL };
+static const char *voldown1[] = { "/home/artour/mysh/dwmvol.sh","-1",NULL };
+static const char *voldown10[] = { "/home/artour/mysh/dwmvol.sh","-10",NULL };
+static const char *volmute[] = { "/home/artour/mysh/dwmvol.sh","m",NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ MODKEY,                       XK_z,      spawn,          {.v = kupfer } },
+	{ MODKEY|ShiftMask,             XK_z,      spawn,          {.v = rofiwin } },
+	{ MODKEY,                       XK_x,      spawn,          {.v = openfile } },
+	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = openfilea } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = dwmbind } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -76,7 +101,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -88,6 +113,14 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = exitcmd } },
+	{ MODKEY,                       XK_F2,     spawn,          {.v = voldown10 } },
+	{ MODKEY|ShiftMask,             XK_F2,     spawn,          {.v = voldown1 } },
+	{ MODKEY,                       XK_F3,     spawn,          {.v = volup10 } },
+	{ MODKEY|ShiftMask,             XK_F3,     spawn,          {.v = volup1 } },
+	{ MODKEY,                       XK_F1,     spawn,          {.v = volmute } },
+	{ 0,                   PrintScreenDWM,     spawn,          {.v = screenshot } },
+	{ MODKEY,              PrintScreenDWM,     spawn,          {.v = screenshotadvanced } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -97,8 +130,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
+/*
+{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
+*/
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
