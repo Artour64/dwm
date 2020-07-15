@@ -4,6 +4,7 @@ Get original at: https://dwm.suckless.org/
 ## Patches:
  - systray https://dwm.suckless.org/patches/systray/
  - fixborders https://dwm.suckless.org/patches/alpha/
+ - centeredmaster https://dwm.suckless.org/patches/centeredmaster/
 
 ## Keybinded Programs:
  - kupfer (app launcher)
