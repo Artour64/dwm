@@ -69,7 +69,7 @@ static const char *rofiwin[]  = { "rofi","-show","window", NULL };
 static const char *openfile[]  = { "/home/artour/mysh/openfile", NULL };
 static const char *openfilea[]  = { "/home/artour/mysh/openfile-a", NULL };
 
-static const char *exitcmd[]  = { "/home/artour/mysh/exit.sh", NULL };
+static const char *exitcmd[]  = { "/home/artour/mysh/exitdwm.sh", NULL };
 
 static const char *dwmbind[]  = { "/home/artour/mysh/dwmbind.sh", NULL };
 /*static const char *i3bindcmd[]  = { "/home/artour/mysh/i3bind.sh", NULL };*/
