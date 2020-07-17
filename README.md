@@ -6,6 +6,7 @@ Get original at: https://dwm.suckless.org/
  - fixborders https://dwm.suckless.org/patches/alpha/
  - centeredmaster https://dwm.suckless.org/patches/centeredmaster/
  - warp https://dwm.suckless.org/patches/warp/
+ - fibonacci https://dwm.suckless.org/patches/fibonacci/
 
 ## Keybinded Programs:
  - kupfer (app launcher)
