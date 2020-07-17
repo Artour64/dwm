@@ -7,6 +7,7 @@ Get original at: https://dwm.suckless.org/
  - centeredmaster https://dwm.suckless.org/patches/centeredmaster/
  - warp https://dwm.suckless.org/patches/warp/
  - fibonacci https://dwm.suckless.org/patches/fibonacci/
+ - vanitygaps https://dwm.suckless.org/patches/vanitygaps/
 
 ## Keybinded Programs:
  - kupfer (app launcher)
