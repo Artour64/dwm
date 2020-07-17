@@ -42,11 +42,11 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "[]=",      tile },    /* first entry is default */	
 	{ "[M]",      monocle },
 	{ "|M|",      centeredmaster },
-	{ ">M>",      centeredfloatingmaster },
+	{ "><>",      NULL },    /* no layout function means floating behavior */
+	/*{ ">M>",      centeredfloatingmaster },*/
 };
 
 /* key definitions */
@@ -69,9 +69,14 @@ static const char *rofiwin[]  = { "rofi","-show","window", NULL };
 static const char *openfile[]  = { "/home/artour/mysh/openfile", NULL };
 static const char *openfilea[]  = { "/home/artour/mysh/openfile-a", NULL };
 
-static const char *exitcmd[]  = { "/home/artour/mysh/exitdwm.sh", NULL };
+static const char *browser[]  = { "firefox", NULL };
+static const char *feed[]  = { "kitty","newsboat", NULL };
+static const char *email[]  = { "geary", NULL };
 
-static const char *dwmbind[]  = { "/home/artour/mysh/dwmbind.sh", NULL };
+static const char *restartdwm[]  = { "/home/artour/dwmsh/restartdwm.sh", NULL };
+static const char *exitcmd[]  = { "/home/artour/dwmsh/exitdwm.sh", NULL };
+
+static const char *dwmbind[]  = { "/home/artour/dwmsh/dwmbind.sh", NULL };
 /*static const char *i3bindcmd[]  = { "/home/artour/mysh/i3bind.sh", NULL };*/
 
 #define PrintScreenDWM	    0x0000ff61
@@ -79,11 +84,11 @@ static const char *screenshot[]  = { "flameshot","screen","-p","/home/artour/Pic
 static const char *screenshotadvanced[]  = { "gnome-screenshot","-i", NULL };
 
 
-static const char *volup1[] = { "/home/artour/mysh/dwmvol.sh","+1",NULL };
-static const char *volup10[] = { "/home/artour/mysh/dwmvol.sh","+10", NULL };
-static const char *voldown1[] = { "/home/artour/mysh/dwmvol.sh","-1",NULL };
-static const char *voldown10[] = { "/home/artour/mysh/dwmvol.sh","-10",NULL };
-static const char *volmute[] = { "/home/artour/mysh/dwmvol.sh","m",NULL };
+static const char *volup1[] = { "/home/artour/dwmsh/dwmvol.sh","+1",NULL };
+static const char *volup10[] = { "/home/artour/dwmsh/dwmvol.sh","+10", NULL };
+static const char *voldown1[] = { "/home/artour/dwmsh/dwmvol.sh","-1",NULL };
+static const char *voldown10[] = { "/home/artour/dwmsh/dwmvol.sh","-10",NULL };
+static const char *volmute[] = { "/home/artour/dwmsh/dwmvol.sh","m",NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -94,6 +99,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = dwmbind } },
+	{ MODKEY,                       XK_n,      spawn,          {.v = browser } },
+	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = feed } },
+	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = email } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -105,10 +113,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -118,6 +125,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = exitcmd } },
+	{ MODKEY|ShiftMask,             XK_r,      spawn,          {.v = restartdwm } },
 	{ MODKEY,                       XK_F2,     spawn,          {.v = voldown10 } },
 	{ MODKEY|ShiftMask,             XK_F2,     spawn,          {.v = voldown1 } },
 	{ MODKEY,                       XK_F3,     spawn,          {.v = volup10 } },
