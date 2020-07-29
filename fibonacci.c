@@ -7,6 +7,15 @@ fibonacci(Monitor *mon, int s) {
 	if(n == 0)
 		return;
 	
+	if (smartgaps == n) {
+		oe = 0; // outer gaps disabled
+	}
+	
+	if (n > m->nmaster)
+		mw = m->nmaster ? (m->ww + m->gappiv*ie) * m->mfact : 0;
+	else
+		mw = m->ww - 2*m->gappov*oe + m->gappiv*ie;
+	
 	nx = mon->wx;
 	ny = 0;
 	nw = mon->ww;

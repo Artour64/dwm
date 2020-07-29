@@ -1461,6 +1461,13 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	c->oldw = c->w; c->w = wc.width = w;
 	c->oldh = c->h; c->h = wc.height = h;
 	wc.border_width = c->bw;
+	if (((nexttiled(c->mon->clients) == c && !nexttiled(c->next))
+	    || &monocle == c->mon->lt[c->mon->sellt]->arrange)
+	    && !c->isfullscreen && !c->isfloating) {
+		c->w = wc.width += c->bw * 2;
+		c->h = wc.height += c->bw * 2;
+		wc.border_width = 0;
+	}
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
 	configure(c);
 	XSync(dpy, False);
@@ -2663,18 +2670,29 @@ main(int argc, char *argv[])
 void
 centeredmaster(Monitor *m)
 {
+	
 	unsigned int i, n, h, mw, mx, my, oty, ety, tw;
 	Client *c;
-
+	
 	/* count number of clients in the selected monitor */
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+	
 	if (n == 0)
 		return;
-
+	if(n == 1){
+		c = nexttiled(m->clients);
+		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
+		return;
+	}
+	int oe=1;
+	if (smartgaps == n) {
+		oe = 0; // outer gaps disabled
+	}
+	
 	/* initialize areas */
 	mw = m->ww;
 	mx = 0;
-	my = 0;
+	my = m->gappov*oe;
 	tw = mw;
 
 	if (n > m->nmaster) {
@@ -2689,28 +2707,34 @@ centeredmaster(Monitor *m)
 		}
 	}
 
-	oty = 0;
-	ety = 0;
+	oty = m->gappov*oe;
+	ety = m->gappov*oe;
 	for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 	if (i < m->nmaster) {
 		/* nmaster clients are stacked vertically, in the center
 		 * of the screen */
 		h = (m->wh - my) / (MIN(n, m->nmaster) - i);
-		resize(c, m->wx + mx, m->wy + my, mw - (2*c->bw),
-		       h - (2*c->bw), 0);
-		my += HEIGHT(c);
+		if(m->nmaster >= n)
+			resize(c, m->wx + mx + m->gappov*oe, m->wy + my, mw - 2*(c->bw + m->gappov*oe),
+		       h - (2*c->bw) - m->gappov*oe, 0);
+		else if(m->nmaster + 1 < n)
+			resize(c, m->wx + mx + m->gappov*oe/2, m->wy + my, mw - 2*c->bw - m->gappov*oe, h - 2*c->bw - m->gappov*oe, 0);
+		else
+			resize(c, m->wx + mx + m->gappov*oe, m->wy + my, mw - 2*c->bw - m->gappov*oe*3/2, h - 2*c->bw - m->gappov*oe, 0);
+		if(my + HEIGHT(c) + m->gappov*oe < m->mh)
+			my += HEIGHT(c) + m->gappov*oe;
 	} else {
 		/* stack clients are stacked vertically */
-		if ((i - m->nmaster) % 2 ) {
+		if ((i - m->nmaster) % 2) {
 			h = (m->wh - ety) / ( (1 + n - i) / 2);
-			resize(c, m->wx, m->wy + ety, tw - (2*c->bw),
-			       h - (2*c->bw), 0);
-			ety += HEIGHT(c);
+			resize(c, m->wx + m->gappov*oe, m->wy + ety, tw - (2*c->bw) - m->gappov*oe*3/2, h - 2*c->bw - m->gappov*oe, 0);
+			if(ety + HEIGHT(c) + m->gappov*oe < m->mh)
+				ety += HEIGHT(c) + m->gappov*oe;
 		} else {
 			h = (m->wh - oty) / ((1 + n - i) / 2);
-			resize(c, m->wx + mx + mw, m->wy + oty,
-			       tw - (2*c->bw), h - (2*c->bw), 0);
-			oty += HEIGHT(c);
+			resize(c, m->wx + mx + mw + m->gappov*oe/2, m->wy + oty, tw - (2*c->bw) - m->gappov*oe*3/2, h - 2*c->bw - m->gappov*oe, 0);
+			if(oty + HEIGHT(c) + m->gappov*oe < m->mh)
+				oty += HEIGHT(c) + m->gappov*oe;
 		}
 	}
 }
