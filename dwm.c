@@ -216,7 +216,7 @@ static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
 static void pop(Client *);
 static void propertynotify(XEvent *e);
-static void quit(const Arg *arg);
+/*static void quit(const Arg *arg);*/
 static Monitor *recttomon(int x, int y, int w, int h);
 static void removesystrayicon(Client *i);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
@@ -234,12 +234,14 @@ static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
 static void setgaps(int oh, int ov, int ih, int iv);
 static void incrgaps(const Arg *arg);
+/*
 static void incrigaps(const Arg *arg);
 static void incrogaps(const Arg *arg);
 static void incrohgaps(const Arg *arg);
 static void incrovgaps(const Arg *arg);
 static void incrihgaps(const Arg *arg);
 static void incrivgaps(const Arg *arg);
+*/
 static void togglegaps(const Arg *arg);
 static void defaultgaps(const Arg *arg);
 static void setlayout(const Arg *arg);
@@ -283,7 +285,7 @@ static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
 static void centeredmaster(Monitor *m);
-static void centeredfloatingmaster(Monitor *m);
+/*static void centeredfloatingmaster(Monitor *m);*/
 
 /* variables */
 static Systray *systray =  NULL;
@@ -1401,13 +1403,13 @@ propertynotify(XEvent *e)
 			updatewindowtype(c);
 	}
 }
-
+/*
 void
 quit(const Arg *arg)
 {
 	running = 0;
 }
-
+*/
 Monitor *
 recttomon(int x, int y, int w, int h)
 {
@@ -1746,7 +1748,7 @@ incrgaps(const Arg *arg)
 		selmon->gappiv + arg->i
 	);
 }
-
+/*
 void
 incrigaps(const Arg *arg)
 {
@@ -1812,7 +1814,7 @@ incrivgaps(const Arg *arg)
 		selmon->gappiv + arg->i
 	);
 }
-
+*/
 void
 setlayout(const Arg *arg)
 {
@@ -2739,50 +2741,5 @@ centeredmaster(Monitor *m)
 	}
 }
 
-void
-centeredfloatingmaster(Monitor *m)
-{
-	unsigned int i, n, w, mh, mw, mx, mxo, my, myo, tx;
-	Client *c;
 
-	/* count number of clients in the selected monitor */
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if (n == 0)
-		return;
 
-	/* initialize nmaster area */
-	if (n > m->nmaster) {
-		/* go mfact box in the center if more than nmaster clients */
-		if (m->ww > m->wh) {
-			mw = m->nmaster ? m->ww * m->mfact : 0;
-			mh = m->nmaster ? m->wh * 0.9 : 0;
-		} else {
-			mh = m->nmaster ? m->wh * m->mfact : 0;
-			mw = m->nmaster ? m->ww * 0.9 : 0;
-		}
-		mx = mxo = (m->ww - mw) / 2;
-		my = myo = (m->wh - mh) / 2;
-	} else {
-		/* go fullscreen if all clients are in the master area */
-		mh = m->wh;
-		mw = m->ww;
-		mx = mxo = 0;
-		my = myo = 0;
-	}
-
-	for(i = tx = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-	if (i < m->nmaster) {
-		/* nmaster clients are stacked horizontally, in the center
-		 * of the screen */
-		w = (mw + mxo - mx) / (MIN(n, m->nmaster) - i);
-		resize(c, m->wx + mx, m->wy + my, w - (2*c->bw),
-		       mh - (2*c->bw), 0);
-		mx += WIDTH(c);
-	} else {
-		/* stack clients are stacked horizontally */
-		w = (m->ww - tx) / (n - i);
-		resize(c, m->wx + tx, m->wy, w - (2*c->bw),
-		       m->wh - (2*c->bw), 0);
-		tx += WIDTH(c);
-	}
-}

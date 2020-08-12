@@ -14,8 +14,8 @@ static const unsigned int borderpx  = 5;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=12" };
-static const char dmenufont[]       = "monospace:size=12";
+static const char *fonts[]          = { "monospace:size=14" };
+static const char dmenufont[]       = "monospace:size=14";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -110,12 +110,20 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = feed } },
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = email } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_k,      focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_d,      focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_Right,  focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_j,      focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_a,      focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_Left,   focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_s,      setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_Down,   setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_w,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_Up,      setmfact,       {.f = +0.05} },
 	{ MODKEY|Mod1Mask,              XK_h,      incrgaps,       {.i = +10 } },
 	{ MODKEY|Mod1Mask,              XK_l,      incrgaps,       {.i = -10 } },
 	{ MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
