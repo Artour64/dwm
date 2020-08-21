@@ -67,9 +67,11 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 /* commands */
+static const char myterm[] = "kitty";
+
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "kitty", NULL };
+static const char *termcmd[]  = { myterm, NULL };
 
 static const char *kupfer[]  = { "kupfer", NULL };
 static const char *rofiwin[]  = { "rofi","-show","window", NULL };
@@ -79,7 +81,8 @@ static const char *openfilea[]  = { "/home/artour/mysh/openfile-a", NULL };
 static const char *killsh[]  = { "/home/artour/mysh/kill.sh", NULL };
 
 static const char *browser[]  = { "firefox", NULL };
-static const char *feed[]  = { "kitty","newsboat", NULL };
+static const char *feed[]  = { myterm,"newsboat", NULL };
+static const char *htop[]  = { myterm,"htop", NULL };
 static const char *email[]  = { "geary", NULL };
 
 static const char *restartdwm[]  = { "/home/artour/dwmsh/restartdwm.sh", NULL };
@@ -105,7 +108,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_z,      spawn,          {.v = rofiwin } },
 	{ MODKEY,                       XK_x,      spawn,          {.v = openfile } },
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = openfilea } },
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = htop } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = dwmbind } },
 	{ MODKEY,                       XK_n,      spawn,          {.v = browser } },
