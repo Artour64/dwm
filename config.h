@@ -76,6 +76,8 @@ static const char *rofiwin[]  = { "rofi","-show","window", NULL };
 static const char *openfile[]  = { "/home/artour/mysh/openfile", NULL };
 static const char *openfilea[]  = { "/home/artour/mysh/openfile-a", NULL };
 
+static const char *killsh[]  = { "/home/artour/mysh/kill.sh", NULL };
+
 static const char *browser[]  = { "firefox", NULL };
 static const char *feed[]  = { "kitty","newsboat", NULL };
 static const char *email[]  = { "geary", NULL };
@@ -123,7 +125,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Down,   setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_w,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Up,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_Up,     setmfact,       {.f = +0.05} },
 	{ MODKEY|Mod1Mask,              XK_h,      incrgaps,       {.i = +10 } },
 	{ MODKEY|Mod1Mask,              XK_l,      incrgaps,       {.i = -10 } },
 	{ MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
@@ -131,6 +133,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
+	{ MODKEY,                       XK_q,      spawn,          {.v = killsh } },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[2]} },
