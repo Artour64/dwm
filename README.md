@@ -9,6 +9,7 @@ Get original at: https://dwm.suckless.org/
  - fibonacci https://dwm.suckless.org/patches/fibonacci/
  - vanitygaps https://dwm.suckless.org/patches/vanitygaps/
  - noborder https://dwm.suckless.org/patches/noborder/
+ - push https://dwm.suckless.org/patches/push/
  
 note: some of the layouts were modified to have gaps
 
