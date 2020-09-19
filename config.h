@@ -77,6 +77,8 @@ static const char *kupfer[]  = { "kupfer", NULL };
 static const char *rofiwin[]  = { "rofi","-show","window", NULL };
 static const char *openfile[]  = { "/home/artour/mysh/openfile", NULL };
 static const char *openfilea[]  = { "/home/artour/mysh/openfile-a", NULL };
+static const char *rf[]  = { "/home/artour/mysh/rf","-e", NULL };
+static const char *rfd[]  = { "/home/artour/mysh/rf","-e","-d", NULL };
 
 static const char *killsh[]  = { "/home/artour/mysh/kill.sh", NULL };
 
@@ -85,6 +87,7 @@ static const char *feed[]  = { myterm,"newsboat", NULL };
 static const char *htop[]  = { myterm,"htop", NULL };
 static const char *email[]  = { "geary", NULL };
 
+static const char *fullscreen[]  = { "/home/artour/mysh/fullscreen.sh", NULL };
 static const char *restartdwm[]  = { "/home/artour/dwmsh/restartdwm.sh", NULL };
 static const char *exitcmd[]  = { "/home/artour/dwmsh/exitdwm.sh", NULL };
 
@@ -108,6 +111,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_z,      spawn,          {.v = rofiwin } },
 	{ MODKEY,                       XK_x,      spawn,          {.v = openfile } },
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = openfilea } },
+	{ MODKEY,                       XK_c,      spawn,          {.v = rf } },
+	{ MODKEY|ShiftMask,             XK_c,      spawn,          {.v = rfd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = htop } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = dwmbind } },
@@ -148,6 +153,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[4]} },
+	{ MODKEY|ControlMask,           XK_f,      spawn,          {.v = fullscreen} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
