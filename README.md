@@ -10,6 +10,7 @@ Get original at: https://dwm.suckless.org/
  - vanitygaps https://dwm.suckless.org/patches/vanitygaps/
  - noborder https://dwm.suckless.org/patches/noborder/
  - push https://dwm.suckless.org/patches/push/
+ - focusmaster https://dwm.suckless.org/patches/focusmaster/
  
 note: some of the layouts were modified to have gaps
 
@@ -17,9 +18,9 @@ note: some of the layouts were modified to have gaps
  - kupfer (app launcher)
  - firefox (web browser)
  - newsboat (rss feed reader)
- - geary (email client)
+ - thunderbird (email client)
  - kitty (terminal emulator)
- - flameshot and gnome-screenshot (screenshot program)
+ - scrot and gnome-screenshot (screenshot program)
  - rofi (various custom scripts)
  - pactl (speaker volume)
  - dwmblocks (status bar)

@@ -8,12 +8,13 @@ fibonacci(Monitor *m, int s)
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
 	if (n == 0)
 		return;
+		/*
 	if (n == 1) {
 		c = nexttiled(m->clients);
 		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
 		return;
-	}
-	int oe=1;
+	}*/
+	unsigned int oe=enablegaps;
 	if (smartgaps == n) {
 		oe = 0; // outer gaps disabled
 	}
