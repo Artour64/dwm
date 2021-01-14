@@ -112,20 +112,24 @@ static const char *voldown10[] = { "/home/artour/dwmsh/dwmvol.sh","-10",NULL };
 static const char *volmute[] = { "/home/artour/dwmsh/dwmvol.sh","m",NULL };
 
 /*mouse*/
-static const char *mouseUp[] = { "xdotool","mousemove_relative","--","0","-10",NULL };
-static const char *mouseUpFast[] = { "xdotool","mousemove_relative","--","0","-100",NULL };
+static const char *mouseUp[] = { "xdotool","mousemove_relative","--","0","-100",NULL };
+static const char *mouseUpSlow[] = { "xdotool","mousemove_relative","--","0","-10",NULL };
+static const char *mouseUpFast[] = { "xdotool","mousemove_relative","--","0","-500",NULL };
 static const char *mouseUpFine[] = { "xdotool","mousemove_relative","--","0","-1",NULL };
 
-static const char *mouseDown[] = { "xdotool","mousemove_relative","--","0","10",NULL };
-static const char *mouseDownFast[] = { "xdotool","mousemove_relative","--","0","100",NULL };
+static const char *mouseDown[] = { "xdotool","mousemove_relative","--","0","100",NULL };
+static const char *mouseDownSlow[] = { "xdotool","mousemove_relative","--","0","10",NULL };
+static const char *mouseDownFast[] = { "xdotool","mousemove_relative","--","0","500",NULL };
 static const char *mouseDownFine[] = { "xdotool","mousemove_relative","--","0","1",NULL };
 
-static const char *mouseLeft[] = { "xdotool","mousemove_relative","--","-10","0",NULL };
-static const char *mouseLeftFast[] = { "xdotool","mousemove_relative","--","-100","0",NULL };
+static const char *mouseLeft[] = { "xdotool","mousemove_relative","--","-100","0",NULL };
+static const char *mouseLeftSlow[] = { "xdotool","mousemove_relative","--","-10","0",NULL };
+static const char *mouseLeftFast[] = { "xdotool","mousemove_relative","--","-500","0",NULL };
 static const char *mouseLeftFine[] = { "xdotool","mousemove_relative","--","-1","0",NULL };
 
-static const char *mouseRight[] = { "xdotool","mousemove_relative","--","10","0",NULL };
-static const char *mouseRightFast[] = { "xdotool","mousemove_relative","--","100","0",NULL };
+static const char *mouseRight[] = { "xdotool","mousemove_relative","--","100","0",NULL };
+static const char *mouseRightSlow[] = { "xdotool","mousemove_relative","--","10","0",NULL };
+static const char *mouseRightFast[] = { "xdotool","mousemove_relative","--","500","0",NULL };
 static const char *mouseRightFine[] = { "xdotool","mousemove_relative","--","1","0",NULL };
 
 static const char *mouseLeftClick[] = { "xdotool","click","1",NULL };
@@ -202,16 +206,20 @@ static Key keys[] = {
 	{ MODKEY,              PrintScreenDWM,     spawn,          {.v = screenshotadvanced } },
 	{ MODKEY,                       XK_KP_Up,  spawn,          {.v = mouseUp} },
 	{ MODKEY|ControlMask,           XK_KP_Up,  spawn,          {.v = mouseUpFast} },
-	{ MODKEY|ShiftMask,             XK_KP_Up,  spawn,          {.v = mouseUpFine} },
+	{ MODKEY|ShiftMask,             XK_KP_Up,  spawn,          {.v = mouseUpSlow} },
+	{ MODKEY|ShiftMask|ControlMask, XK_KP_Up,  spawn,          {.v = mouseUpFine} },
 	{ MODKEY,                      XK_KP_Begin,spawn,          {.v = mouseDown} },
 	{ MODKEY|ControlMask,          XK_KP_Begin,spawn,          {.v = mouseDownFast} },
-	{ MODKEY|ShiftMask,            XK_KP_Begin,spawn,          {.v = mouseDownFine} },
+	{ MODKEY|ShiftMask,             XK_KP_Begin,spawn,          {.v = mouseDownSlow} },
+	{ MODKEY|ShiftMask|ControlMask, XK_KP_Begin,spawn,          {.v = mouseDownFine} },
 	{ MODKEY,                       XK_KP_Left,spawn,          {.v = mouseLeft} },
 	{ MODKEY|ControlMask,           XK_KP_Left,spawn,          {.v = mouseLeftFast} },
-	{ MODKEY|ShiftMask,             XK_KP_Left,spawn,          {.v = mouseLeftFine} },
+	{ MODKEY|ShiftMask,             XK_KP_Left,spawn,          {.v = mouseLeftSlow} },
+	{ MODKEY|ShiftMask|ControlMask, XK_KP_Left,spawn,          {.v = mouseLeftFine} },
 	{ MODKEY,                      XK_KP_Right,spawn,          {.v = mouseRight} },
 	{ MODKEY|ControlMask,          XK_KP_Right,spawn,          {.v = mouseRightFast} },
-	{ MODKEY|ShiftMask,            XK_KP_Right,spawn,          {.v = mouseRightFine} },
+	{ MODKEY|ShiftMask,             XK_KP_Right,spawn,          {.v = mouseRightSlow} },
+	{ MODKEY|ShiftMask|ControlMask, XK_KP_Right,spawn,          {.v = mouseRightFine} },
 	{ MODKEY,                       XK_KP_End, spawn,          {.v = mouseLeftClick} },
 	{ MODKEY,                       XK_KP_Next,spawn,          {.v = mouseRightClick} },
 	{ MODKEY,                       XK_KP_Down,spawn,          {.v = mouseMiddleClick} },
